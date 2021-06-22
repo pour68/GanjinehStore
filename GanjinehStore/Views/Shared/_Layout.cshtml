@@ -1,13 +1,27 @@
 ﻿<!DOCTYPE html>
 
-<html>
+<html dir="rtl" lang="fa-IR">
 <head>
     <meta name="viewport" content="width=device-width" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+    <link rel="stylesheet" href="~/css/main.min.css" />
     <title>@ViewBag.Title</title>
 </head>
 <body>
-    <div>
+
+    <!-- quick access -->
+    <partial name="_QuickAccessPartial" />
+
+    <!-- navigation menu -->
+    <partial name="_NavPartial" />
+
+    <main>
         @RenderBody()
-    </div>
+    </main>
+
+    <!-- footer -->
+    <partial name="_FooterPartial" />
+
+    <script src="~/js/main.js"></script>
 </body>
 </html>
