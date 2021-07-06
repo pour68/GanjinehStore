@@ -21,7 +21,7 @@ namespace GanjinehStore.Services
             _logger = logger;
         }
 
-        public BookPagingViewModel GetPaginatedBooks(string title = null,
+        public ItemPagingViewModel<Book> GetPaginatedBooks(string title = null,
         int pageNumber = 1,
         int pageSize = 32)
         {
@@ -33,9 +33,9 @@ namespace GanjinehStore.Services
 
             var pagesCount = (int)Math.Ceiling(Decimal.Divide(booksCount, pageSize));
 
-            return new BookPagingViewModel
+            return new ItemPagingViewModel<Book>
             {
-                Books = books
+                Items = books
                 .OrderByDescending(b => b.BookId)
                 .Skip(skip)
                 .Take(take)
