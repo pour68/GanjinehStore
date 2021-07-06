@@ -32,6 +32,10 @@ namespace GanjinehStore.Models
         [MaxLength(32, ErrorMessage = "{0} نمی تواند از {1} بیشتر باشد.")]
         public string ISBN { get; set; }
 
+        [Display(Name = "کاور")]
+        [MaxLength(128, ErrorMessage = "{0} نمی تواند از {1} بیشتر باشد.")]
+        public string Cover { get; set; }
+
         [Display(Name = "نویسنده")]
         [Required(ErrorMessage = "{0} الزامی است.")]
         public int AuthorId { get; set; }

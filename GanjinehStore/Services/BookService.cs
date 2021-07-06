@@ -1,7 +1,9 @@
-﻿using GanjinehStore.Data;
+﻿using GanjinehStore.Utilities;
+using GanjinehStore.Data;
 using GanjinehStore.Models;
 using GanjinehStore.Services.Interfaces;
 using GanjinehStore.ViewModels;
+using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Linq;
@@ -19,21 +21,10 @@ namespace GanjinehStore.Services
             _logger = logger;
         }
 
-        public int BooksCount(string title) 
+        public BookPagingViewModel GetPaginatedBooks(string title = null,
+        int pageNumber = 1,
+        int pageSize = 32)
         {
-            if (!string.IsNullOrEmpty(title))
-            {
-                return _context.Books.Count(b => b.Title.Contains(title));
-            }
-
-            return _context.Books.Count();
-        }
-
-        public BookPagingViewModel GetPaginatedBooks(string title = null, 
-            int pageNumber = 1, 
-            int pageSize = 32)
-        {
-            // list of books
             IQueryable<Book> books = _context.Books;
 
             var take = pageSize;
@@ -52,6 +43,54 @@ namespace GanjinehStore.Services
                 PageNumber = pageNumber,
                 PagesCount = pagesCount
             };
+        }
+
+        public int BooksCount(string title)
+        {
+            if (!string.IsNullOrEmpty(title))
+            {
+                return _context.Books.Count(b => b.Title.Contains(title));
+            }
+
+            return _context.Books.Count();
+        }
+
+        public Book Add(Book book, IFormFile bookCover)
+        {
+            try
+            {
+                book.Cover = FileUploaderUtility.UploadFile(bookCover, "books");
+
+                _context.Books.Add(book);
+                _context.SaveChanges();
+
+                return book;
+            }
+            catch (Exception ex)
+            {
+                LogError(ex.StackTrace, ex.Message);
+
+                return null;
+            }
+        }
+
+        public Book Update(Book book, IFormFile bookCover)
+        {
+            try
+            {
+                book.Cover = FileUploaderUtility.UpdateUploadedFile(book.Cover, bookCover, "books");
+
+                _context.Books.Add(book);
+                _context.SaveChanges();
+
+                return book;
+            }
+            catch (Exception ex)
+            {
+                LogError(ex.StackTrace, ex.Message);
+
+                return null;
+            }
         }
     }
 }
