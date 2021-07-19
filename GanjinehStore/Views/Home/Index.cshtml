@@ -1,4 +1,5 @@
-﻿
+﻿@model IEnumerable<Book>
+
 @{
     ViewBag.Title = "صفحه اصلی";
 }
@@ -116,135 +117,24 @@
 
             <div class="book__list d-grid">
 
-                <div class="book__item">
-                    <figure>
-                        <img src="img/food.jpg" alt="تست" />
-                        <figcaption>نوا محمدی</figcaption>
-                    </figure>
-                    <div>
-                        <h3 class="book__title">تغذیه سالم</h3>
+                @foreach (var book in Model)
+                {
+                    <div class="book__item">
+                        <figure>
+                            <img src="/img/@book.Cover" alt="@book.Title" />
+                            <figcaption>@book.Author.FullName</figcaption>
+                        </figure>
                         <div>
-                            <span class="tag">علوم تغدیه</span>
+                            <h3 class="book__title">@book.Title</h3>
+                            <div>
+                                @foreach (var bookGenre in book.BookGenres)
+                                {
+                                    <span class="tag">@bookGenre.Genre.Title</span>
+                                }
+                            </div>
                         </div>
                     </div>
-                </div>
-
-                <div class="book__item">
-                    <figure>
-                        <img src="img/code.jpg" alt="تست" />
-                        <figcaption>پوریا نایب ابوالقاسم</figcaption>
-                    </figure>
-                    <div>
-                        <h3 class="book__title">آموزش سی شارپ</h3>
-                        <div>
-                            <span class="tag">برنامه نویسی</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="book__item">
-                    <figure>
-                        <img src="img/fruits.jpg" alt="تست" />
-                        <figcaption>مهدی اسکندری</figcaption>
-                    </figure>
-                    <div>
-                        <h3 class="book__title">میوه ها</h3>
-                        <div>
-                            <span class="tag">علوم تغذیه</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="book__item">
-                    <figure>
-                        <img src="img/city.jpg" alt="تست" />
-                        <figcaption>آریا خدارحمی</figcaption>
-                    </figure>
-                    <div>
-                        <h3 class="book__title">شهرسازی مدرن</h3>
-                        <div>
-                            <span class="tag">علمی</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="book__item">
-                    <figure>
-                        <img src="img/die-hotel.jpg" alt="تست" />
-                        <figcaption>روشنک رستمی</figcaption>
-                    </figure>
-                    <div>
-                        <h3 class="book__title">هتل مرگ</h3>
-                        <div>
-                            <span class="tag">جنایی</span> <span class="tag">ترسناک</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="book__item">
-                    <figure>
-                        <img src="img/game-of-thrones.jpg" alt="تست" />
-                        <figcaption>Goarge RR. martin</figcaption>
-                    </figure>
-                    <div>
-                        <h3 class="book__title">تاج و تخت</h3>
-                        <div>
-                            <span class="tag">تخیلی</span> <span class="tag">ماجراجوبی</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="book__item">
-                    <figure>
-                        <img src="img/die-hotel.jpg" alt="تست" />
-                        <figcaption>J. K. Rowling</figcaption>
-                    </figure>
-                    <div>
-                        <h3 class="book__title">هری پاتر کتاب جادو</h3>
-                        <div>
-                            <span class="tag">تخیلی</span> <span class="tag">ماجراجوبی</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="book__item">
-                    <figure>
-                        <img src="img/nature.jpg" alt="تست" />
-                        <figcaption>مهدی اسکندری</figcaption>
-                    </figure>
-                    <div>
-                        <h3 class="book__title">آمازون بهشت جهان</h3>
-                        <div>
-                            <span class="tag">گردشگری</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="book__item">
-                    <figure>
-                        <img src="img/andreas-wagner.jpg" alt="تست" />
-                        <figcaption>آریا خدارحمی</figcaption>
-                    </figure>
-                    <div>
-                        <h3 class="book__title">راه تو را می خواند</h3>
-                        <div>
-                            <span class="tag">تخیلی</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="book__item">
-                    <figure>
-                        <img src="img/love.jpg" alt="تست" />
-                        <figcaption>آریا خدارحمی</figcaption>
-                    </figure>
-                    <div>
-                        <h3 class="book__title">عشق مقدس</h3>
-                        <div>
-                            <span class="tag">عاشقانه</span>
-                        </div>
-                    </div>
-                </div>
+                }
 
             </div>
         </div>

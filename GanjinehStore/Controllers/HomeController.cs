@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using GanjinehStore.Services.Interfaces;
+using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,9 +9,16 @@ namespace GanjinehStore.Controllers
 {
     public class HomeController : Controller
     {
+        private readonly IBookService _bookService;
+
+        public HomeController(IBookService bookService)
+        {
+            _bookService = bookService;
+        }
+
         public IActionResult Index()
         {
-            return View();
+            return View(_bookService.GetAllBooks());
         }
     }
 }

@@ -1,4 +1,6 @@
 using GanjinehStore.Data;
+using GanjinehStore.Services;
+using GanjinehStore.Services.Interfaces;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -29,6 +31,11 @@ namespace GanjinehStore
             services.AddDbContext<ApplicationDbContext>(options => {
                 options.UseSqlServer(Configuration.GetConnectionString("ClientConnection"));
             });
+
+            services.AddTransient<IAuthorService, AuthorService>();
+            services.AddTransient<IBookService, BookService>();
+            services.AddTransient<IGenreService, GenreService>();
+            services.AddTransient<IPublicationService, PublicationService>();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

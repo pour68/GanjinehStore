@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Linq;
+using System.Collections.Generic;
+using Microsoft.EntityFrameworkCore;
 
 namespace GanjinehStore.Services
 {
@@ -92,5 +94,12 @@ namespace GanjinehStore.Services
                 return null;
             }
         }
+
+        public IEnumerable<Book> GetAllBooks() => _context.Books
+            .Include(b => b.Author)
+            .Include(b => b.Publication)
+            .Include(b => b.BookGenres)
+            .ThenInclude(bg => bg.Genre)
+            .ToList();
     }
 }

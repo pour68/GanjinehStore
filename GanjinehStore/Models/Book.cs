@@ -45,5 +45,7 @@ namespace GanjinehStore.Models
         public int PublicationId { get; set; }
 
         public ICollection<BookGenre> BookGenres { get; set; }
+        public Author Author { get; set; }
+        public Publication Publication { get; set; }
     }
 }

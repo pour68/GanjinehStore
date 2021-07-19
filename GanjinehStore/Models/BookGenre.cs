@@ -14,5 +14,8 @@ namespace GanjinehStore.Models
         [Display(Name = "کتاب")]
         [Required(ErrorMessage = "{0} الزامی است.")]
         public int BookId { get; set; }
+
+        public Genre Genre { get; set; }
+        public Book Book { get; set; }
     }
 }
